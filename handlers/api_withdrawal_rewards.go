@@ -8,27 +8,29 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gobitfly/eth2-beaconchain-explorer/db"
+	"github.com/gobitfly/eth2-beaconchain-explorer/services"
 	"github.com/gobitfly/eth2-beaconchain-explorer/types"
 	"github.com/gobitfly/eth2-beaconchain-explorer/utils"
+	"github.com/gorilla/mux"
 	"github.com/lib/pq"
 )
 
 // WithdrawalRewardResponse represents rewards data linked to a withdrawal address
 type WithdrawalRewardResponse struct {
-	WithdrawalAddress string        `json:"withdrawal_address"`
-	ValidatorCount    int64         `json:"validator_count"`
-	TotalRewards      string        `json:"total_rewards"`
+	WithdrawalAddress string                `json:"withdrawal_address"`
+	ValidatorCount    int64                 `json:"validator_count"`
+	TotalRewards      string                `json:"total_rewards"`
 	Validators        []ValidatorRewardInfo `json:"validators"`
 }
 
 // ValidatorRewardInfo contains validator details and its rewards
 type ValidatorRewardInfo struct {
-	ValidatorIndex    int64         `json:"validator_index"`
-	ValidatorPubkey   string        `json:"validator_pubkey"`
-	WithdrawalAddress string        `json:"withdrawal_address"`
-	Balance           int64         `json:"balance"`
-	EffectiveBalance  int64         `json:"effective_balance"`
-	Status            string        `json:"status"`
+	ValidatorIndex    int64  `json:"validator_index"`
+	ValidatorPubkey   string `json:"validator_pubkey"`
+	WithdrawalAddress string `json:"withdrawal_address"`
+	Balance           int64  `json:"balance"`
+	EffectiveBalance  int64  `json:"effective_balance"`
+	Status            string `json:"status"`
 }
 
 // ApiValidatorRewardsByWithdrawalAddress godoc
@@ -36,7 +38,7 @@ type ValidatorRewardInfo struct {
 // @Tags Validator
 // @Description Returns all validators associated with a withdrawal address along with their current rewards
 // @Produce json
-// @Param withdrawalAddress path string true "Withdrawal address (0x prefixed eth1 address)" 
+// @Param withdrawalAddress path string true "Withdrawal address (0x prefixed eth1 address)"
 // @Success 200 {object} types.ApiResponse{data=WithdrawalRewardResponse}
 // @Failure 400 {object} types.ApiResponse
 // @Failure 500 {object} types.ApiResponse
