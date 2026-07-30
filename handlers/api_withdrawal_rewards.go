@@ -9,10 +9,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gobitfly/eth2-beaconchain-explorer/db"
 	"github.com/gobitfly/eth2-beaconchain-explorer/services"
-	"github.com/gobitfly/eth2-beaconchain-explorer/types"
 	"github.com/gobitfly/eth2-beaconchain-explorer/utils"
 	"github.com/gorilla/mux"
-	"github.com/lib/pq"
 )
 
 // WithdrawalRewardResponse represents rewards data linked to a withdrawal address
